@@ -3,37 +3,37 @@ import Card from "./component/EventCard.jsx";
 const dummy = [
   {
     nama: "Perayaan Natal",
-    gambar:'pengisi.jpg',
+    gambar: "pengisi.jpg",
     waktu: "10 Mei 2026 - 19:00",
     tempat: "Universitas Katolik Parahyangan",
   },
   {
     nama: "Tech Conference",
-    gambar:'BB.jpg',
+    gambar: "BB.jpg",
     waktu: "15 Mei 2026 - 09:00",
     tempat: "Bandung Convention Center",
   },
   {
     nama: "Music Festival",
-    gambar:'pengisi.jpg',
+    gambar: "pengisi.jpg",
     waktu: "20 Mei 2026 - 18:30",
     tempat: "Sasana Budaya Ganesha",
   },
   {
     nama: "Startup Expo",
-    gambar:'BB.jpg',
+    gambar: "BB.jpg",
     waktu: "25 Mei 2026 - 13:00",
     tempat: "BINUS Bandung",
   },
   {
     nama: "Workshop UI/UX",
-    gambar:'pengisi.jpg',
+    gambar: "pengisi.jpg",
     waktu: "28 Mei 2026 - 10:00",
     tempat: "Telkom University",
   },
   {
     nama: "Seminar AI",
-    gambar:'BB.jpg',
+    gambar: "BB.jpg",
     waktu: "30 Mei 2026 - 15:00",
     tempat: "ITB Aula Barat",
   },
@@ -73,6 +73,48 @@ const Dashboard = () => {
             tempat={event.tempat}
           />
         ))}
+      </div>
+      <div class="mt-6 flex items-center justify-end gap-2">
+        {/* Prev */}
+        <a
+          class="pagination-btn
+    "
+        >
+          {"<-"} Prev
+        </a>
+
+        {/* Active Page */}
+        <a
+          class="
+      pagination-btn active
+    "
+        >
+          1
+        </a>
+
+        {/* Normal Page */}
+        <a
+          class="
+      pagination-btn
+    "
+        >
+          2
+        </a>
+
+        <a
+          class="
+      pagination-btn
+    "
+        >
+          3
+        </a>
+
+        {/* Next */}
+        <a
+          class="pagination-btn"
+        >
+          Next {"->"}
+        </a>
       </div>
     </div>
   );
