@@ -52,7 +52,7 @@ const Dashboard = () => {
         </header>
         <div class="relative w-full max-w-md">
           <img
-            src="/src/img/search.jpg"
+            src="/src/img/search.svg"
             alt="search"
             class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2"
           />
