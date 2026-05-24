@@ -1,3 +1,5 @@
+import { A } from "@solidjs/router";
+
 function CardMyEvent(props) {
   return (
     <div
@@ -106,7 +108,9 @@ function CardMyEvent(props) {
             hover:bg-indigo-700
           "
       >
-        Lihat Detail
+        <A href="/myevent/1">
+            Lihat Detail
+        </A>
       </button>
     </div>
   );

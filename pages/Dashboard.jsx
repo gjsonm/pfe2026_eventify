@@ -1,5 +1,6 @@
 // pages/Dashboard.jsx
 import Card from "./component/EventCard.jsx";
+import Pagination from "../src/Pagination.jsx";
 const dummy = [
   {
     nama: "Perayaan Natal",
@@ -74,48 +75,7 @@ const Dashboard = () => {
           />
         ))}
       </div>
-      <div class="mt-6 flex items-center justify-end gap-2">
-        {/* Prev */}
-        <a
-          class="pagination-btn
-    "
-        >
-          {"<-"} Prev
-        </a>
-
-        {/* Active Page */}
-        <a
-          class="
-      pagination-btn active
-    "
-        >
-          1
-        </a>
-
-        {/* Normal Page */}
-        <a
-          class="
-      pagination-btn
-    "
-        >
-          2
-        </a>
-
-        <a
-          class="
-      pagination-btn
-    "
-        >
-          3
-        </a>
-
-        {/* Next */}
-        <a
-          class="pagination-btn"
-        >
-          Next {"->"}
-        </a>
-      </div>
+      <Pagination/>
     </div>
   );
 };
