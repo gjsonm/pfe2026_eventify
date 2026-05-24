@@ -1,7 +1,6 @@
 import BackButton from "../src/Back";
 import EventHeader from "../src/EventHeader";
 import EventDetailSection from "../src/EventDetailSection";
-import Peserta from "../src/Peserta";
 import { useParams } from "@solidjs/router";
 
 const EventDetail = () => {

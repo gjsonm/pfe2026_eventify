@@ -1,4 +1,5 @@
 import Peserta from "./Peserta";
+import Pagination from "./Pagination";
 
 export default function EventDetailSection() {
   return (
@@ -39,7 +40,8 @@ export default function EventDetailSection() {
             </div>
 
             <div class="tabel-peserta w-full mt-2">
-                <Peserta />
+                <Peserta/>
+                <Pagination/>
             </div>
       </div>
     </div>
