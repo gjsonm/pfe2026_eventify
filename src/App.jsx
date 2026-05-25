@@ -15,10 +15,9 @@ const App = () => {
       <Router root={Layout}>
         <Route path="/" component={Dashboard} />
 
-        <Route path="/myevent" component={MyEvent}>
-          <Route path="/" component={EventForm} />
-          <Route path="/new" component={EventForm} />
-        </Route>
+        <Route path="/myevent" component={MyEvent} />
+        <Route path="/myevent/new" component={EventForm} />
+        
 
         <Route path="/myevent/:id" component={EventDetail} />
 
