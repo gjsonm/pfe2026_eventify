@@ -6,7 +6,7 @@ export default function EventHeader() {
       <h1 className="font-bold text-black text-3xl">Parcestra</h1>
       <button className="px-4 py-2 border border-black-300 text-black-700 font-semibold rounded hover:border-indigo-500 hover:text-indigo-500 transition-colors"
         type="button"
-        onClick={() => BatalPendaftaran(props.eventId)}> Batal Pendaftaran </button>
+        onClick={() => BatalPendaftaran(props.eventId)}> Cancel Registration </button>
     </div>
   );
 }

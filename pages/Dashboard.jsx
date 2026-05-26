@@ -1,5 +1,5 @@
 // pages/Dashboard.jsx
-import Card from "./component/EventCard.jsx";
+import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 const dummy = [
   {
@@ -60,12 +60,12 @@ const Dashboard = () => {
 
           <input
             type="text"
-            placeholder="Nama Event"
+            placeholder="Event Name"
             class="w-full rounded-md border border-gray-300 focus:border-indigo-500 py-2 pl-10 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           />
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start mx-auto">
         {dummy.map((event) => (
           <Card
             nama={event.nama}
@@ -75,7 +75,7 @@ const Dashboard = () => {
           />
         ))}
       </div>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };

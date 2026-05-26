@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router"
 function Card(props) {
   return (
     <div
@@ -90,10 +91,12 @@ function Card(props) {
         </div>
       </div>
       {/* Button */}
-      <button
+      <A
         class="
             mt-1
+            block
             w-full
+            text-center
             rounded
             bg-indigo-600
             px-3
@@ -105,9 +108,9 @@ function Card(props) {
             text-white
             hover:bg-indigo-700
           "
-      >
-        Register
-      </button>
+        href={props.href || "/myevent/1"}>
+        {props.buttonText || "Register"}
+      </A>
     </div>
   );
 }

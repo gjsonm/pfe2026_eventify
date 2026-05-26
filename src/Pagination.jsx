@@ -1,23 +1,24 @@
+import { A } from "@solidjs/router";
 export default function Pagination() {
     return (
         <div className="pagination">
             <div class="mt-6 flex items-center justify-end gap-2">
-        {/* Prev */}
-        <a class="pagination-btn">
-            {"<-"} Prev
-        </a>
+                {/* Prev */}
+                <A class="pagination-btn">
+                    {"<-"} Prev
+                </A>
 
-        {/* Active Page */}
-        <a class="pagination-btn active">1</a>
+                {/* Active Page */}
+                <A class="pagination-btn active">1</A>
 
-        {/* Normal Page */}
-        <a class="pagination-btn">2</a>
+                {/* Normal Page */}
+                <A class="pagination-btn">2</A>
 
-        <a class="pagination-btn">3</a>
+                <A class="pagination-btn">3</A>
 
-        {/* Next */}
-        <a class="pagination-btn">Next {"->"}</a>
-      </div>
-    </div>
+                {/* Next */}
+                <A class="pagination-btn">Next {"->"}</A>
+            </div>
+        </div>
     );
 }

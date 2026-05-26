@@ -11,7 +11,7 @@ export default () => {
               href="/"
               class="text-2xl font-black text-indigo-600 flex items-center hover:opacity-90"
             >
-              <span>Logo</span>
+              <span>Eventify</span>
             </A>
           </div>
 

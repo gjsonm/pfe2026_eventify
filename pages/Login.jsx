@@ -1,3 +1,4 @@
+import { A } from "@solidjs/router";
 export default () => {
   return (
     <>
@@ -62,12 +63,12 @@ export default () => {
             </form>
             <p class="mt-6 text-center text-sm text-gray-600">
               Don't have account?{" "}
-              <a
+              <A
                 href="/register"
                 class="font-semibold text-black text-indigo-700"
               >
                 Register
-              </a>
+              </A>
             </p>
           </div>
         </div>

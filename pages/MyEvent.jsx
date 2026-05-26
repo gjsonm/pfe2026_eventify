@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import CardMyEvent from "./component/EventCardMyEvent.jsx";
+import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 
 const dummy = [
@@ -50,7 +50,7 @@ const MyEvent = () => {
             <h1 class="text-3xl font-bold tracking-tight text-indigo-600">
               My Event
             </h1>
-            <small>Acara yang saya buat</small>
+            <small>Events I Created</small>
           </div>
         </header>
         <div class="relative max-w-md">
@@ -58,22 +58,23 @@ const MyEvent = () => {
             href="/myevent/new"
             class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-indigo-100 flex justify-end"
           >
-            Buat Acara
+            Create Event
           </A>
         </div>
       </div>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-        {dummy.slice(0,4).map((event) => (
-          <CardMyEvent
+        {dummy.slice(0, 4).map((event) => (
+          <Card
             nama={event.nama}
             gambar={event.gambar}
             waktu={event.waktu}
             tempat={event.tempat}
+            buttonText="View Details"
           />
         ))}
       </div>
-      <Pagination/>
-      
+      <Pagination />
+
       {/* garis pembatas */}
       <hr class="border-t-4 border-indigo-600"></hr>
 
@@ -81,22 +82,23 @@ const MyEvent = () => {
         <header class="relative">
           <div class="mx-auto max-w-7xl ">
             <h1 class="text-3xl font-bold tracking-tight text-indigo-600">
-              Acara yang saya ikuti
+              Events I Joined
             </h1>
           </div>
         </header>
       </div>
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-        {dummy.slice(0,4).map((event) => (
-          <CardMyEvent
+        {dummy.slice(0, 4).map((event) => (
+          <Card
             nama={event.nama}
             gambar={event.gambar}
             waktu={event.waktu}
             tempat={event.tempat}
+            buttonText="View Details"
           />
         ))}
       </div>
-      <Pagination/>
+      <Pagination />
     </div>
   );
 };
