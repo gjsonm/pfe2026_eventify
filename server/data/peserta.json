@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "participant_id": 2,
+        "event_id": 1
+    },
+    {
+        "id": 2,
+        "participant_id": 3,
+        "event_id": 1
+    },
+    {
+        "id": 3,
+        "participant_id": 4,
+        "event_id": 1
+    },
+    {
+        "id": 4,
+        "participant_id": 5,
+        "event_id": 1
+    }
+]
