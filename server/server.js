@@ -14,23 +14,12 @@ app.get('/api/events', (req, res) => {
     const data2 = fs.readFileSync('./data/peserta.json', 'utf8')
     const peserta = JSON.parse(data2)
 
-    res.json({ events, peserta })
-})
+    const data3 = fs.readFileSync('./data/pengguna.json', 'utf8')
+    let pengguna = JSON.parse(data3)
+    // Buang email ama password karna mo dikirim ke client
+    pengguna = pengguna.map(({ password, email, ...p }) => p)
 
-// kirim event + peserta berdasarkan id
-app.get('/api/event/:id', (req, res) => {
-    // baca file event.json
-    const data = fs.readFileSync('./data/event.json', 'utf8')
-    const events = JSON.parse(data)
-
-    // baca file peserta.json
-    const data2 = fs.readFileSync('./data/peserta.json', 'utf8')
-    const pesertas = JSON.parse(data2)
-
-    const { id } = req.params
-    const event = events.find(e => e.id == id)
-    const peserta = pesertas.filter(p => p.event_id == id)
-    res.json({ event, peserta })
+    res.json({ events, peserta, pengguna })
 })
 
 // register pengguna
