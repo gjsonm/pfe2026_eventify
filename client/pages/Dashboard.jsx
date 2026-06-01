@@ -41,9 +41,10 @@ const dummy = [
     tempat: "ITB Aula Barat",
   },
 ];
-const { events, peserta, pengguna } = useEventContext();
 
 const Dashboard = () => {
+  const { events, peserta, pengguna } = useEventContext();
+
   return (
     <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
       <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
