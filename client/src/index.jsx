@@ -5,6 +5,7 @@ import "./css/index.css";
 
 import App from "./App";
 import { AuthContextProvider } from "./context/AuthContext";
+import { EventProvider } from "./context/EventContext";
 
 const root = document.getElementById("root");
 
@@ -16,6 +17,8 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
 
 render(() => (
   <AuthContextProvider>
-    <App />
+    <EventProvider>
+      <App />
+    </EventProvider>
   </AuthContextProvider>
 ), root);

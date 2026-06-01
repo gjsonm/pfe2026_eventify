@@ -1,6 +1,8 @@
 // pages/Dashboard.jsx
 import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
+import { useEventContext } from "../src/context/EventContext";
+
 const dummy = [
   {
     nama: "Perayaan Natal",
@@ -39,6 +41,8 @@ const dummy = [
     tempat: "ITB Aula Barat",
   },
 ];
+const { events, peserta, pengguna } = useEventContext();
+
 const Dashboard = () => {
   return (
     <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
