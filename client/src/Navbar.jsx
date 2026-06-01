@@ -1,6 +1,16 @@
 import { A } from "@solidjs/router";
+import { useAuthContext } from "./context/AuthContext";
+import { Match, Switch } from "solid-js";
 
 export default () => {
+
+  const auth = useAuthContext();
+
+  async function handleLogout() {
+    sessionStorage.removeItem("user")
+    auth.setUser(null);
+  }
+
   return (
     <nav class="sticky top-0 z-50 bg-white shadow-sm">
       <div class="max-w-7xl mx-auto px-4">
@@ -34,23 +44,40 @@ export default () => {
             </A>
           </div>
 
+          {/* Kalo misal udh login bakalan muncul nama sama tombol logout, klo blom bakal login sama register*/}
           {/* Link Login dan Register*/}
           <div class="flex items-center space-x-4">
-            <A
-              href="/login"
-              class="text-gray-600 hover:text-indigo-600 font-medium text-sm px-3 py-2 rounded-lg transition-colors"
-            >
-              Masuk
-            </A>
-            <A
-              href="/register"
-              class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-indigo-100"
-            >
-              Register
-            </A>
+            <Switch fallback={<div>NOTHING</div>}>
+              <Match when={!auth.user()}>
+                <A
+                  href="/login"
+                  class="text-gray-600 hover:text-indigo-600 font-medium text-sm px-3 py-2 rounded-lg transition-colors"
+                >
+                  Login
+                </A>
+                <A
+                  href="/register"
+                  class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-indigo-100"
+                >
+                  Register
+                </A>
+              </Match>
+              <Match when={auth.user()}>
+                <span class="font-medium text-indigo-700">
+                  Hi, {auth.user().name}
+                </span>
+
+                <button
+                  onClick={handleLogout}
+                  class="bg-red-600 hover:bg-red-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-sm shadow-red-100"
+                >
+                  Logout
+                </button>
+              </Match>
+            </Switch>
           </div>
         </div>
       </div>
-    </nav>
+    </nav >
   );
 };

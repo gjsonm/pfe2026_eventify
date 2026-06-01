@@ -4,6 +4,7 @@ import "solid-devtools";
 import "./css/index.css";
 
 import App from "./App";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const root = document.getElementById("root");
 
@@ -13,4 +14,8 @@ if (import.meta.env.DEV && !(root instanceof HTMLElement)) {
   );
 }
 
-render(() => <App />, root);
+render(() => (
+  <AuthContextProvider>
+    <App />
+  </AuthContextProvider>
+), root);

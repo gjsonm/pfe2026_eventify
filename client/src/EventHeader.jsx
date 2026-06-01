@@ -1,9 +1,10 @@
 import { BatalPendaftaran } from "./js/BatalPendaftaran";
 import { useNavigate } from "@solidjs/router";
-import {useAuth} from "./AuthContext";
+import { useAuthContext } from "./context/AuthContext";
+import { Match, Switch } from "solid-js";
 
-export default function EventHeader() {
-  const {user} = useAuth();
+export default function EventHeader(props) {
+  const auth = useAuthContext();
   const navigate = useNavigate();
 
   const handleRequireLogin = () => {
@@ -27,7 +28,7 @@ export default function EventHeader() {
         }
       >
         
-        <Match when={user() && props.role === "creator"}>
+        <Match when={auth.user() && props.role === "creator"}>
           <button 
             type="button"
             onclick={() => HapusEvent(props.eventId)}
@@ -37,7 +38,7 @@ export default function EventHeader() {
           </button>
         </Match>
 
-        <Match when={user() && props.isRegistered}>
+        <Match when={auth.user() && props.isRegistered}>
           <button 
             type="button"
             onClick={() => BatalPendaftaran(props.eventId)}
@@ -47,7 +48,7 @@ export default function EventHeader() {
           </button>
         </Match>
 
-        <Match when={user() && !props.isRegistered}>
+        <Match when={auth.user() && !props.isRegistered}>
           <button 
             type="button"
             onClick={()=> DaftarEvent(props.eventId)}

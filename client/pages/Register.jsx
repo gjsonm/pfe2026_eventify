@@ -1,5 +1,47 @@
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
+
 export default () => {
+  const navigate = useNavigate();
+
+  async function handleRegister(e) {
+    e.preventDefault();
+
+    // ambil data nama, email, password, sama confirm password
+    const form = e.currentTarget;
+    const userName = form.name.value;
+    const userEmail = form.email.value;
+    const userPassword = form.password.value;
+    const userConfirmPassword = form.confirmpassword.value;
+
+    if (userPassword !== userConfirmPassword) {
+      alert("Password mismatch");
+      return;
+    }
+
+    // kirim post register
+    const response = await fetch('http://localhost:3001/api/register', {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: userName,
+        email: userEmail,
+        password: userPassword,
+      })
+    });
+
+    if (response.ok) {
+      console.log("RESPONSE OK")
+      alert("Succesfully registered!")
+      navigate("/login")
+    } else {
+      alert("Register failed!")
+      return;
+    }
+  }
+
   return (
     <>
       <div class="flex h-screen">
@@ -29,7 +71,7 @@ export default () => {
               Create new account to start using Eventify
             </p>
 
-            <form class="space-y-5" action="/login">
+            <form class="space-y-5" onSubmit={handleRegister}>
               <div>
                 <label class="mb-2 block text-sm font-medium text-indigo-700">
                   Full Name
@@ -37,6 +79,7 @@ export default () => {
 
                 <input
                   type="text"
+                  name="name"
                   placeholder="your full name"
                   class="w-full rounded-xl border border-indigo-200 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                 />
@@ -49,6 +92,7 @@ export default () => {
 
                 <input
                   type="email"
+                  name="email"
                   placeholder="your email"
                   class="w-full rounded-xl border border-indigo-200 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                 />
@@ -61,6 +105,7 @@ export default () => {
 
                 <input
                   type="password"
+                  name="password"
                   placeholder="your password"
                   class="w-full rounded-xl border border-indigo-200 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                 />
@@ -73,6 +118,7 @@ export default () => {
 
                 <input
                   type="password"
+                  name="confirmpassword"
                   placeholder="your password (again)"
                   class="w-full rounded-xl border border-indigo-200 px-4 py-3 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200"
                 />

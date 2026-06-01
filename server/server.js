@@ -2,9 +2,16 @@ const express = require('express')
 const app = express()
 const port = 3001
 const fs = require('fs');
-const { use } = require('react');
 
 app.use(express.json())
+
+// ref https://dev.to/reynaldi/how-to-fix-the-no-access-control-allow-origin-header-error-5c1j
+const cors = require('cors');
+app.use(
+    cors({
+        origin: ["http://localhost:3000"],
+    })
+);
 
 // kirim semua event & peserta
 app.get('/api/events', (req, res) => {
@@ -36,6 +43,7 @@ app.post('/api/register', (req, res) => {
     users.push(newUser)
 
     fs.writeFileSync('./data/pengguna.json', JSON.stringify(users, null, 4))
+    res.json();
 })
 
 // login pengguna
@@ -49,7 +57,7 @@ app.post('/api/login', (req, res) => {
     const user = users.find(u => u.email === email && u.password === password)
 
     if (!user) {
-        return res.status(401).json({ message: 'Email atau password salah' })
+        return res.status(401).json({ message: 'Invalid Email or Password' })
     }
 
     res.json(user)
@@ -120,5 +128,5 @@ app.post('/api/cancel-event', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`Listening on port ${port}`)
 })
