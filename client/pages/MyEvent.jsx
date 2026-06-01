@@ -2,52 +2,40 @@ import { A, useNavigate } from "@solidjs/router";
 import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 import { useAuthContext } from "../src/context/AuthContext.jsx";
-import { Match, Switch } from "solid-js";
-
-const dummy = [
-  {
-    nama: "Perayaan Natal",
-    gambar: "pengisi.jpg",
-    waktu: "10 Mei 2026 - 19:00",
-    tempat: "Universitas Katolik Parahyangan",
-  },
-  {
-    nama: "Tech Conference",
-    gambar: "BB.jpg",
-    waktu: "15 Mei 2026 - 09:00",
-    tempat: "Bandung Convention Center",
-  },
-  {
-    nama: "Music Festival",
-    gambar: "pengisi.jpg",
-    waktu: "20 Mei 2026 - 18:30",
-    tempat: "Sasana Budaya Ganesha",
-  },
-  {
-    nama: "Startup Expo",
-    gambar: "BB.jpg",
-    waktu: "25 Mei 2026 - 13:00",
-    tempat: "BINUS Bandung",
-  },
-  {
-    nama: "Workshop UI/UX",
-    gambar: "pengisi.jpg",
-    waktu: "28 Mei 2026 - 10:00",
-    tempat: "Telkom University",
-  },
-  {
-    nama: "Seminar AI",
-    gambar: "BB.jpg",
-    waktu: "30 Mei 2026 - 15:00",
-    tempat: "ITB Aula Barat",
-  },
-];
+import { Match, Switch, For } from "solid-js";
+import { useEventContext } from "../src/context/EventContext.jsx"; 
 
 const MyEvent = () => {
 
   const auth = useAuthContext();
   const navigate = useNavigate();
+  const { events, peserta } = useEventContext();
 
+  //Event yang dibuat oleh user yg login
+  const createdEvents = () => {
+    const currentUser = auth.user();
+    if (!currentUser) {
+      return [];
+    }
+    return events.filter((event) => event.creator === currentUser.id);
+  };
+
+  //Event yang diikuti oleh user yg login
+  const joinedEvents = () => {
+    const currentUser = auth.user();
+    if (!currentUser) {
+      return [];
+    }
+    
+    //Ambil event yg diikuti oleh user yg login dan ambil id event yg diikuti
+    const idEvents = peserta
+      .filter((p) => p.participant_id === currentUser.id)
+      .map((p) => p.event_id);
+
+    //Kembalikan event yg sesuai dengan idEvents dan id event yg ada di server
+    return events.filter((event) => idEvents.includes(event.id));
+  };
+  
   return (
     <Switch fallback={navigate("/login")}>
       <Match when={auth.user()}>
@@ -71,15 +59,17 @@ const MyEvent = () => {
             </div>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-            {dummy.slice(0, 4).map((event) => (
-              <Card
-                nama={event.nama}
-                gambar={event.gambar}
-                waktu={event.waktu}
-                tempat={event.tempat}
-                buttonText="View Details"
-              />
-            ))}
+            <For each={createdEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Belum ada event yang Anda buat.</p>}>
+              {(event) => (
+                <Card
+                  nama={event.name}
+                  gambar={event.image}
+                  waktu={`${event.date} - ${event.time}`} 
+                  tempat={event.location}
+                  buttonText="View Details"
+                />
+              )}
+            </For>
           </div>
           <Pagination />
 
@@ -96,15 +86,17 @@ const MyEvent = () => {
             </header>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-            {dummy.slice(0, 4).map((event) => (
-              <Card
-                nama={event.nama}
-                gambar={event.gambar}
-                waktu={event.waktu}
-                tempat={event.tempat}
-                buttonText="View Details"
-              />
-            ))}
+            <For each={joinedEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Anda belum bergabung ke event mana pun.</p>}>
+              {(event) => (
+                <Card
+                  nama={event.name}
+                  gambar={event.image}
+                  waktu={`${event.date} - ${event.time}`}
+                  tempat={event.location}
+                  buttonText="View Details"
+                />
+              )}
+            </For>
           </div>
           <Pagination />
         </div>
