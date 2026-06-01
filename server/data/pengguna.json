@@ -2,31 +2,31 @@
     {
         "id": 1,
         "name": "Kenneth",
-        "email": "kenneth",
+        "email": "kenneth@gmail.com",
         "password": "password"
     },
     {
         "id": 2,
         "name": "Andrew",
-        "email": "andrew",
+        "email": "andrew@gmail.com",
         "password": "password"
     },
     {
         "id": 3,
         "name": "Greg",
-        "email": "greg",
+        "email": "greg@gmail.com",
         "password": "password"
     },
     {
         "id": 4,
         "name": "Felix",
-        "email": "felix",
+        "email": "felix@gmail.com",
         "password": "password"
     },
     {
         "id": 5,
         "name": "Nadira",
-        "email": "nadira",
+        "email": "nadira@gmail.com",
         "password": "password"
     }
 ]
