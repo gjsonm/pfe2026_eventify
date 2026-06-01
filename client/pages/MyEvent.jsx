@@ -1,6 +1,8 @@
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
+import { useAuthContext } from "../src/context/AuthContext.jsx";
+import { Match, Switch } from "solid-js";
 
 const dummy = [
   {
@@ -42,64 +44,72 @@ const dummy = [
 ];
 
 const MyEvent = () => {
+
+  const auth = useAuthContext();
+  const navigate = useNavigate();
+
   return (
-    <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
-      <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
-        <header class="relative">
-          <div class="mx-auto max-w-7xl ">
-            <h1 class="text-3xl font-bold tracking-tight text-indigo-600">
-              My Event
-            </h1>
-            <small>Events I Created</small>
+    <Switch fallback={navigate("/login")}>
+      <Match when={auth.user()}>
+        <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
+          <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
+            <header class="relative">
+              <div class="mx-auto max-w-7xl ">
+                <h1 class="text-3xl font-bold tracking-tight text-indigo-600">
+                  My Event
+                </h1>
+                <small>Events I Created</small>
+              </div>
+            </header>
+            <div class="relative max-w-md">
+              <A
+                href="/myevent/new"
+                class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-indigo-100 flex justify-end"
+              >
+                Create Event
+              </A>
+            </div>
           </div>
-        </header>
-        <div class="relative max-w-md">
-          <A
-            href="/myevent/new"
-            class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2.5 rounded-xl text-sm font-semibold shadow-md shadow-indigo-100 flex justify-end"
-          >
-            Create Event
-          </A>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
+            {dummy.slice(0, 4).map((event) => (
+              <Card
+                nama={event.nama}
+                gambar={event.gambar}
+                waktu={event.waktu}
+                tempat={event.tempat}
+                buttonText="View Details"
+              />
+            ))}
+          </div>
+          <Pagination />
+
+          {/* garis pembatas */}
+          <hr class="border-t-4 border-indigo-600"></hr>
+
+          <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
+            <header class="relative">
+              <div class="mx-auto max-w-7xl ">
+                <h1 class="text-3xl font-bold tracking-tight text-indigo-600">
+                  Events I Joined
+                </h1>
+              </div>
+            </header>
+          </div>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
+            {dummy.slice(0, 4).map((event) => (
+              <Card
+                nama={event.nama}
+                gambar={event.gambar}
+                waktu={event.waktu}
+                tempat={event.tempat}
+                buttonText="View Details"
+              />
+            ))}
+          </div>
+          <Pagination />
         </div>
-      </div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-        {dummy.slice(0, 4).map((event) => (
-          <Card
-            nama={event.nama}
-            gambar={event.gambar}
-            waktu={event.waktu}
-            tempat={event.tempat}
-            buttonText="View Details"
-          />
-        ))}
-      </div>
-      <Pagination />
-
-      {/* garis pembatas */}
-      <hr class="border-t-4 border-indigo-600"></hr>
-
-      <div class="mx-auto flex w-full max-w-7xl items-center justify-between gap-4">
-        <header class="relative">
-          <div class="mx-auto max-w-7xl ">
-            <h1 class="text-3xl font-bold tracking-tight text-indigo-600">
-              Events I Joined
-            </h1>
-          </div>
-        </header>
-      </div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-        {dummy.slice(0, 4).map((event) => (
-          <Card
-            nama={event.nama}
-            gambar={event.gambar}
-            waktu={event.waktu}
-            tempat={event.tempat}
-            buttonText="View Details"
-          />
-        ))}
-      </div>
-      <Pagination />
-    </div>
+      </Match>
+    </Switch>
   );
 };
 
