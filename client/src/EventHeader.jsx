@@ -33,7 +33,7 @@ export default function EventHeader() {
             onclick={() => HapusEvent(props.eventId)}
             class="px-4 py-2 border border-red-500 text-red-500 font-semibold rounded hover:bg-red-50 transition-colors"
           > 
-            Hapus Acara 
+            Hapus Event
           </button>
         </Match>
 
