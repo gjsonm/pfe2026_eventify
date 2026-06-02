@@ -1,30 +1,36 @@
 import { useNavigate, useParams } from "@solidjs/router";
 import { useAuthContext } from "../src/context/AuthContext";
+import { useEventContext } from "../src/context/EventContext";
+import { Match, Switch } from "solid-js";
+
 import BackButton from "../src/Back";
 import EventHeader from "../src/EventHeader";
 import EventDetailSection from "../src/EventDetailSection";
-import { Match, Switch } from "solid-js";
-import event from "../../server/data/event.json";
-import peserta from "../../server/data/peserta.json";
 
 const EventDetail = () => {
   const auth = useAuthContext();
+  const eventStore = useEventContext();
   const params = useParams();
   const navigate = useNavigate();
 
-  const currEvent = event.find(e => e.id === parseInt(params.id, 10));
+  const currEvent = () => eventStore.events.find(e => e.id === parseInt(params.id, 10))
 
-  let userRole = "";
-  let isRegistered = false;
-
-  if (auth.user() && auth.user().id === currEvent.creator) {
-    userRole = "creator";
-  } else if (auth.user()) {
-    const checkRegister = peserta.some(p => p.userId === auth.user().id && p.eventId === currEvent.id);
-    if (checkRegister) {
-      isRegistered = true;
+  const userRole = () => {
+    if (auth.user() && auth.user().id === currEvent.creator) {
+      return "creator";
+    } else if (auth.user()) {
+      return "peserta"
     }
   }
+
+  const isRegistered = () => {
+    if (auth.user() && currEvent() && userRole() !== "creator") {
+      return eventStore.peserta.some(
+        p => p.userId === auth.user().id && p.eventId === currEvent().id
+      );
+    }
+    return false;
+  };
 
   return (
     <Switch fallback={navigate("/login")}>
@@ -33,8 +39,8 @@ const EventDetail = () => {
           <BackButton />
           <EventHeader
             eventId={params.id}
-            role={userRole}
-            isRegistered={isRegistered}
+            role={userRole()}
+            isRegistered={isRegistered()}
           />
           <div class="grid-layout">
             <EventDetailSection />
