@@ -8,7 +8,7 @@ export default function EventHeader(props) {
   const navigate = useNavigate();
 
   const handleRequireLogin = () => {
-    alert("Harap login terlebih dahulu!");
+    alert("Login terlebih dahulu!");
     navigate("/login")
   }
 
@@ -31,7 +31,7 @@ export default function EventHeader(props) {
         <Match when={auth.user() && props.role === "creator"}>
           <button 
             type="button"
-            onclick={() => HapusEvent(props.eventId)}
+            onClick={() => HapusEvent(props.eventId)}
             class="px-4 py-2 border border-red-500 text-red-500 font-semibold rounded hover:bg-red-50 transition-colors"
           > 
             Hapus Event
