@@ -34,5 +34,11 @@
         "name": "maresi",
         "email": "maresi@gmail.com",
         "password": "password"
+    },
+    {
+        "id": 7,
+        "name": "andru",
+        "email": "andru@gmail.com",
+        "password": "pass"
     }
 ]
