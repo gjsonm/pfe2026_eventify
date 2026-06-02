@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from "@solidjs/router";
 import { useAuthContext } from "../src/context/AuthContext";
 import { useEventContext } from "../src/context/EventContext";
-import { createEffect, Match, Switch } from "solid-js";
+import { Match, Switch } from "solid-js";
 
 import BackButton from "../src/Back";
 import EventHeader from "../src/EventHeader";
@@ -12,12 +12,6 @@ const EventDetail = () => {
   const eventStore = useEventContext();
   const params = useParams();
   const navigate = useNavigate();
-
-  createEffect(() => {
-    if (!auth.user()) {
-      return navigate("/login", { replace: true});
-    }
-  })
 
   const currEvent = () => eventStore.events.find(e => e.id === parseInt(params.id, 10))
 
