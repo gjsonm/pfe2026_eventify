@@ -1,5 +1,19 @@
-import { A } from "@solidjs/router"
+import { A } from "@solidjs/router";
+import { Match, Switch } from "solid-js";
+import { useAuthContext } from "./context/AuthContext";
+import { useEventContext } from "./context/EventContext";
+import RegisterButton from "./RegisterButton";
+
 function Card(props) {
+  const auth = useAuthContext();
+  const { peserta } = useEventContext();
+
+  const isCreator = () => auth.user() && auth.user().id === props.creator;
+  const isRegistered = () => {
+    if (!auth.user()) return false;
+    return peserta.some(p => p.event_id === props.eventId && p.participant_id === auth.user().id);
+  };
+
   return (
     <div
       class="
@@ -91,26 +105,53 @@ function Card(props) {
         </div>
       </div>
       {/* Button */}
-      <A
-        class="
-            mt-1
-            block
-            w-full
-            text-center
-            rounded
-            bg-indigo-600
-            px-3
-            py-1
-            text-xs
-            md:px-4
-            md:py-2
-            md:text-sm
-            text-white
-            hover:bg-indigo-700
-          "
-        href={props.href || "/myevent/1"}>
-        {props.buttonText || "Register"}
-      </A>
+      <div class="mt-1">
+        <Switch>
+          <Match when={isCreator() || isRegistered()}>
+            <A
+              class="
+                  block
+                  w-full
+                  text-center
+                  rounded
+                  bg-indigo-600
+                  px-3
+                  py-1
+                  text-xs
+                  md:px-4
+                  md:py-2
+                  md:text-sm
+                  text-white
+                  hover:bg-indigo-700
+                "
+              href={`/myevent/${props.eventId}`}
+            >
+              View Details
+            </A>
+          </Match>
+
+          <Match when={!isCreator() && !isRegistered()}>
+            <RegisterButton
+              eventId={props.eventId}
+              class="
+                  block
+                  w-full
+                  text-center
+                  rounded
+                  bg-indigo-600
+                  px-3
+                  py-1
+                  text-xs
+                  md:px-4
+                  md:py-2
+                  md:text-sm
+                  text-white
+                  hover:bg-indigo-700
+                "
+            />
+          </Match>
+        </Switch>
+      </div>
     </div>
   );
 }

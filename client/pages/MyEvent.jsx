@@ -3,7 +3,7 @@ import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 import { useAuthContext } from "../src/context/AuthContext.jsx";
 import { Match, Switch, For } from "solid-js";
-import { useEventContext } from "../src/context/EventContext.jsx"; 
+import { useEventContext } from "../src/context/EventContext.jsx";
 
 const MyEvent = () => {
 
@@ -26,7 +26,7 @@ const MyEvent = () => {
     if (!currentUser) {
       return [];
     }
-    
+
     //Ambil event yg diikuti oleh user yg login dan ambil id event yg diikuti
     const idEvents = peserta
       .filter((p) => p.participant_id === currentUser.id)
@@ -35,7 +35,7 @@ const MyEvent = () => {
     //Kembalikan event yg sesuai dengan idEvents dan id event yg ada di server
     return events.filter((event) => idEvents.includes(event.id));
   };
-  
+
   return (
     <Switch fallback={navigate("/login")}>
       <Match when={auth.user()}>
@@ -59,14 +59,15 @@ const MyEvent = () => {
             </div>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-            <For each={createdEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Belum ada event yang Anda buat.</p>}>
+            <For each={createdEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">You haven't created any events yet.</p>}>
               {(event) => (
                 <Card
                   nama={event.name}
                   gambar={event.image}
-                  waktu={`${event.date} - ${event.time}`} 
+                  waktu={`${event.date} - ${event.time}`}
                   tempat={event.location}
-                  buttonText="View Details"
+                  eventId={event.id}
+                  creator={event.creator}
                 />
               )}
             </For>
@@ -86,14 +87,15 @@ const MyEvent = () => {
             </header>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-            <For each={joinedEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Anda belum bergabung ke event mana pun.</p>}>
+            <For each={joinedEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">You haven't joined any events yet.</p>}>
               {(event) => (
                 <Card
                   nama={event.name}
                   gambar={event.image}
                   waktu={`${event.date} - ${event.time}`}
                   tempat={event.location}
-                  buttonText="View Details"
+                  eventId={event.id}
+                  creator={event.creator}
                 />
               )}
             </For>

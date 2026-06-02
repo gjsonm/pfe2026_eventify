@@ -76,6 +76,7 @@ app.post('/api/register-event', (req, res) => {
     pesertas.push(newPa)
 
     fs.writeFileSync('./data/peserta.json', JSON.stringify(pesertas, null, 4))
+    res.json(newPa)
 })
 
 // Bikin event
@@ -95,6 +96,7 @@ app.post('/api/create-event', (req, res) => {
     events.push(newEvent)
 
     fs.writeFileSync('./data/event.json', JSON.stringify(events, null, 4))
+    res.json(newEvent)
 })
 
 // Batal Pendaftaran
@@ -108,6 +110,7 @@ app.post('/api/cancel-regis', (req, res) => {
     const hasilHapus = pesertas.filter(p => !(p.event_id == eventid && p.participant_id == participant_id))
 
     fs.writeFileSync('./data/peserta.json', JSON.stringify(hasilHapus, null, 4))
+    res.json({ message: "Success" })
 })
 
 // Batalkan event
@@ -125,6 +128,7 @@ app.post('/api/cancel-event', (req, res) => {
 
     fs.writeFileSync('./data/event.json', JSON.stringify(hasilHapusEvent, null, 4))
     fs.writeFileSync('./data/peserta.json', JSON.stringify(hasilHapusPeserta, null, 4))
+    res.json({ message: "Success" })
 })
 
 app.listen(port, () => {

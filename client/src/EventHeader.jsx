@@ -1,63 +1,29 @@
-import { BatalPendaftaran } from "./js/BatalPendaftaran";
-import { useNavigate } from "@solidjs/router";
 import { useAuthContext } from "./context/AuthContext";
 import { Match, Switch } from "solid-js";
+import { HapusEvent } from "./js/HapusEvent";
+import CancelButton from "./CancelButton";
 
 export default function EventHeader(props) {
   const auth = useAuthContext();
-  const navigate = useNavigate();
-
-  const handleRequireLogin = () => {
-    alert("Login terlebih dahulu!");
-    navigate("/login")
-  }
 
   return (
     <div className="flex justify-between items-center mb-6 border-b pb-4 mt-4">
-      <h1 className="font-bold text-black text-3xl">Parcestra</h1>
-      
-      <Switch 
-        fallback={
-          <button 
-            type="button"
-            onClick={handleRequireLogin}
-            class="px-4 py-2 border border-indigo-500 text-indigo-500 font-semibold rounded hover:bg-indigo-50 transition-colors"
-          > 
-            Register Event 
-          </button>
-        }
-      >
-        
+      <h1 className="font-bold text-black text-3xl">{props.event?.name}</h1>
+
+      <Switch>
         <Match when={auth.user() && props.role === "creator"}>
-          <button 
+          <button
             type="button"
-            onClick={() => HapusEvent(props.eventId)}
+            onClick={() => HapusEvent(props.event?.id)}
             class="px-4 py-2 border border-red-500 text-red-500 font-semibold rounded hover:bg-red-50 transition-colors"
-          > 
-            Hapus Event
+          >
+            Delete Event
           </button>
         </Match>
 
-        <Match when={auth.user() && props.isRegistered}>
-          <button 
-            type="button"
-            onClick={() => BatalPendaftaran(props.eventId)}
-            class="px-4 py-2 border border-orange-500 text-orange-500 font-semibold rounded hover:bg-orange-50 transition-colors"
-          > 
-            Cancel Event 
-          </button>
+        <Match when={auth.user() && props.isRegistered()}>
+          <CancelButton eventId={props.event?.id} />
         </Match>
-
-        <Match when={auth.user() && !props.isRegistered}>
-          <button 
-            type="button"
-            onClick={()=> DaftarEvent(props.eventId)}
-            class="px-4 py-2 border border-indigo-500 text-indigo-500 font-semibold rounded hover:bg-indigo-50 transition-colors"
-          > 
-            Register Event 
-          </button>
-        </Match>
-
       </Switch>
     </div>
   );

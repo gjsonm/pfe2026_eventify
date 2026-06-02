@@ -1,31 +1,22 @@
-export default function Peserta() {
-    // Data Dummy
-    const daftarPeserta = [
-        { no: 1, nama: "Adit" },
-        { no: 2, nama: "Sopo" },
-        { no: 3, nama: "Jarwo" },
-        { no: 4, nama: "Ipin" },
-        { no: 5, nama: "Upin" },
-    ];
-
+export default function Peserta(props) {
     return (
         <div class="w-full mt-8 md:mt-0">
-            <h3 class="font-bold text-black text-2xl mb-2">Peserta</h3>
-            
+            <h3 class="font-bold text-black text-2xl mb-2">Participants</h3>
+
             <table class="w-full table-auto">
                 <thead>
-                <tr>
-                    <th class="pb-2 font-bold text-black text-center w-1/4">No</th>
-                    <th class="pb-2 font-bold text-black text-center w-3/4">Nama Peserta</th>
-                </tr>
+                    <tr>
+                        <th class="pb-2 font-bold text-black text-center w-1/4">No</th>
+                        <th class="pb-2 font-bold text-black text-center w-3/4">Participant Name</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <For each={daftarPeserta}>
-                        {(peserta) => (
-                        <tr>
-                            <td class="py-2 font-bold text-black text-center">{peserta.no}</td>
-                            <td class="py-2 font-bold text-black text-center">{peserta.nama}</td>
-                        </tr>
+                    <For each={props.participantList}>
+                        {(namaPeserta, index) => (
+                            <tr>
+                                <td class="py-2 font-bold text-black text-center">{index() + 1}</td>
+                                <td class="py-2 font-bold text-black text-center">{namaPeserta}</td>
+                            </tr>
                         )}
                     </For>
                 </tbody>
