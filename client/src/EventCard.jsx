@@ -62,7 +62,7 @@ function Card(props) {
             "
           />
 
-          <p>12 Mei 2026 - 19:00</p>
+          <p>{props.waktu}</p>
         </div>
 
         {/* Lokasi */}
@@ -87,7 +87,7 @@ function Card(props) {
             "
           />
 
-          <p>Bandung Convention Center</p>
+          <p>{props.tempat}</p>
         </div>
       </div>
       {/* Button */}

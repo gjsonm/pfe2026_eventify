@@ -1,49 +1,9 @@
-// pages/Dashboard.jsx
 import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 import { useEventContext } from "../src/context/EventContext";
 
-const dummy = [
-  {
-    nama: "Perayaan Natal",
-    gambar: "pengisi.jpg",
-    waktu: "10 Mei 2026 - 19:00",
-    tempat: "Universitas Katolik Parahyangan",
-  },
-  {
-    nama: "Tech Conference",
-    gambar: "BB.jpg",
-    waktu: "15 Mei 2026 - 09:00",
-    tempat: "Bandung Convention Center",
-  },
-  {
-    nama: "Music Festival",
-    gambar: "pengisi.jpg",
-    waktu: "20 Mei 2026 - 18:30",
-    tempat: "Sasana Budaya Ganesha",
-  },
-  {
-    nama: "Startup Expo",
-    gambar: "BB.jpg",
-    waktu: "25 Mei 2026 - 13:00",
-    tempat: "BINUS Bandung",
-  },
-  {
-    nama: "Workshop UI/UX",
-    gambar: "pengisi.jpg",
-    waktu: "28 Mei 2026 - 10:00",
-    tempat: "Telkom University",
-  },
-  {
-    nama: "Seminar AI",
-    gambar: "BB.jpg",
-    waktu: "30 Mei 2026 - 15:00",
-    tempat: "ITB Aula Barat",
-  },
-];
-
 const Dashboard = () => {
-  const { events, peserta, pengguna } = useEventContext();
+  const { events } = useEventContext();
 
   return (
     <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
@@ -70,15 +30,19 @@ const Dashboard = () => {
           />
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start mx-auto">
-        {dummy.map((event) => (
-          <Card
-            nama={event.nama}
-            gambar={event.gambar}
-            waktu={event.waktu}
-            tempat={event.tempat}
-          />
-        ))}
+      
+      <div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start mx-auto">
+          {events.map((event) => (
+            <Card
+              id={event.id}
+              nama={event.name}
+              gambar={event.image}
+              waktu={`${event.date} - ${event.time}`}
+              tempat={event.location}
+            />
+          ))}
+        </div>
       </div>
       <Pagination />
     </div>
