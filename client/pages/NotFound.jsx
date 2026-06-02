@@ -10,19 +10,19 @@ const NotFound = () => {
 
                 <div class="flex flex-col gap-1">
                     <h2 class="text-2xl font-bold text-gray-800">
-                        Page Not Found! 
+                        Page Not Found!
                     </h2>
 
                     <p class="text-base text-gray-500 max-w-sm">
-                        Halaman yang kamu cari tidak ada
+                        The page you are looking for does not exist
                     </p>
                 </div>
 
                 <A
-                    href="/" 
+                    href="/"
                     class="mt-2 w-52 bg-indigo-600 text-white border border-indigo-600 rounded-xl py-2.5 font-medium text-center cursor-pointer transition-all duration-200 hover:bg-indigo-700 hover:border-indigo-700 shadow-sm"
                 >
-                    Kembali ke Dashboard
+                    Back to Dashboard
                 </A>
             </div>
         </div>

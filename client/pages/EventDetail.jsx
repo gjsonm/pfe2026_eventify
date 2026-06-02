@@ -9,24 +9,24 @@ import EventDetailSection from "../src/EventDetailSection";
 
 const EventDetail = () => {
   const auth = useAuthContext();
-  const eventStore = useEventContext();
+  const { events, peserta } = useEventContext();
   const params = useParams();
   const navigate = useNavigate();
 
-  const currEvent = () => eventStore.events.find(e => e.id === parseInt(params.id, 10))
+  const currEvent = () => events.find(e => e.id.toString() === params.id)
 
   const userRole = () => {
-    if (auth.user() && auth.user().id === currEvent.creator) {
+    if (auth.user() && auth.user().id === currEvent()?.creator) {
       return "creator";
     } else if (auth.user()) {
-      return "peserta"
+      return "participant"
     }
   }
 
   const isRegistered = () => {
     if (auth.user() && currEvent() && userRole() !== "creator") {
-      return eventStore.peserta.some(
-        p => p.userId === auth.user().id && p.eventId === currEvent().id
+      return peserta.some(
+        p => p.participant_id === auth.user().id && p.event_id === currEvent().id
       );
     }
     return false;
@@ -38,12 +38,12 @@ const EventDetail = () => {
         <div class="px-8 md:px-16 py-8 w-full">
           <BackButton />
           <EventHeader
-            eventId={params.id}
+            event={currEvent()}
             role={userRole()}
-            isRegistered={isRegistered()}
+            isRegistered={isRegistered}
           />
           <div class="grid-layout">
-            <EventDetailSection />
+            <EventDetailSection event={currEvent()} />
           </div>
         </div>
       </Match>
