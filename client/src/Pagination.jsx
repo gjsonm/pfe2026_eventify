@@ -1,25 +1,45 @@
 import { A } from "@solidjs/router";
-export default function Pagination() {
+import { For } from "solid-js";
+
+export default function Pagination(props) {
+    
+    const pageNumbers = () => {
+        const pages = [];
+        for(let i = 1; i <= props.total(); i++){
+            pages.push(i);
+        }
+        return pages;
+    };
+
     return (
         <div className="pagination">
             <div class="mt-6 flex items-center justify-end gap-2">
-                {/* Sementara pake activeClass="" biar bisa di warnanya itu g detect .active di css soalny blm ad perbedaan alamat */}
-                {/* Todo : Hapus activeclass nanti */}
-                {/* Prev */}
-                <A href="#" activeClass="" class="pagination-btn">
+                <button 
+                    onClick={() => props.onPageChange(props.current() - 1)}
+                    disabled={props.current() === 1}
+                    class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                >
                     {"<-"} Prev
-                </A>
+                </button>
 
-                {/* Active Page */}
-                <A href="#" activeClass="" class="pagination-btn active">1</A>
+                <For each={pageNumbers()}>
+                    {(page) => (
+                        <button
+                            onClick={() => props.onPageChange(page)}
+                            class={`pagination-btn ${props.current() === page ? 'active' : ''}`}
+                        >
+                            {page}
+                        </button>
+                    )}
+                </For>
 
-                {/* Normal Page */}
-                <A href="#" activeClass="" class="pagination-btn">2</A>
-
-                <A href="#" activeClass="" class="pagination-btn">3</A>
-
-                {/* Next */}
-                <A href="#" activeClass="" class="pagination-btn">Next {"->"}</A>
+                <button 
+                    onClick={() => props.onPageChange(props.current() + 1)}
+                    disabled={props.current() === props.total() || props.total() === 0}
+                    class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                    Next {"->"}
+                </button>
             </div>
         </div>
     );
