@@ -2,6 +2,7 @@ import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 import { useEventContext } from "../src/context/EventContext";
 import { useSearchParams } from "@solidjs/router";
+import { createSignal, For } from "solid-js";
 
 const Dashboard = () => {
   const { events } = useEventContext();
@@ -21,6 +22,14 @@ const Dashboard = () => {
       return eventName.includes(query);
     });
   }
+
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = createSignal(1);
+  const paginasiEvent = () => {
+    const start = (currentPage() - 1) * itemsPerPage;
+    return filteredEvents().slice(start, start + itemsPerPage);
+  }
+  const totalPages = () => Math.ceil(filteredEvents().length / itemsPerPage);
 
   return (
     <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
@@ -46,6 +55,7 @@ const Dashboard = () => {
             value={searchParams.search || ""}
             oninput={(e) => {
               setSearchParams({ search: e.target.value });
+              setCurrentPage(1);
             }}
             class="w-full rounded-md border border-gray-300 focus:border-indigo-500 py-2 pl-10 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           />
@@ -54,7 +64,7 @@ const Dashboard = () => {
 
       <div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start mx-auto">
-          <For each={filteredEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Currently no events available</p>}>
+          <For each={paginasiEvent()} fallback={<p class="col-span-full text-gray-500 italic py-4">Currently no events available</p>}>
             {(event) => (
               <Card
                 nama={event.name}
@@ -68,7 +78,11 @@ const Dashboard = () => {
           </For>
         </div>
       </div>
-      <Pagination />
+      <Pagination 
+          current={currentPage} 
+          total={totalPages} 
+          onPageChange={(page) => setCurrentPage(page)} 
+        />
     </div>
   );
 };
