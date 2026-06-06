@@ -1,9 +1,26 @@
 import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 import { useEventContext } from "../src/context/EventContext";
+import { useSearchParams } from "@solidjs/router";
 
 const Dashboard = () => {
   const { events } = useEventContext();
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const filteredEvents = () => {
+    const query = (searchParams.search || "").toLowerCase();
+
+    if(!query) {
+      return events;
+    }
+
+    return events.filter((event) => {
+      if (!event.name) return false;
+
+      const eventName = event.name.toLowerCase();
+      return eventName.includes(query);
+    });
+  }
 
   return (
     <div class="min-h-screen flex flex-col bg-gray-100 px-4 py-6 sm:px-6 lg:px-8 gap-4">
@@ -26,6 +43,10 @@ const Dashboard = () => {
           <input
             type="text"
             placeholder="Event Name"
+            value={searchParams.search || ""}
+            oninput={(e) => {
+              setSearchParams({ search: e.target.value });
+            }}
             class="w-full rounded-md border border-gray-300 focus:border-indigo-500 py-2 pl-10 pr-4 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200"
           />
         </div>
@@ -33,7 +54,7 @@ const Dashboard = () => {
       
       <div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start mx-auto">
-          <For each={events} fallback={<p class="col-span-full text-gray-500 italic py-4">Saat ini belum ada event yanb tersedia</p>}>
+          <For each={filteredEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Saat ini belum ada event yanb tersedia</p>}>
             {(event) => (
               <Card
                 nama={event.name}
