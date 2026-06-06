@@ -1,10 +1,36 @@
-import { useAuthContext } from "./context/AuthContext";
 import { Match, Switch } from "solid-js";
-import { HapusEvent } from "./js/HapusEvent";
+import { useNavigate } from "@solidjs/router";
+import { useAuthContext } from "./context/AuthContext";
 import CancelButton from "./CancelButton";
 
 export default function EventHeader(props) {
   const auth = useAuthContext();
+  const navigate = useNavigate();
+
+  const HapusEvent = async (e) => {
+    console.log("Tombol diklik, mencoba menghapus event:", props.event?.id);
+
+    if (!auth.user() || !props.event?.id) return;
+    try {
+      const response = await fetch("http://localhost:3001/api/cancel-event", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event_id: props.event?.id,
+          user_id: auth.user().id,
+        }),
+      });
+
+      if (response.ok) {
+        alert("Event successfully deleted.");
+        navigate(-1);
+      } else {
+        alert("Failed to delete event.");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <div className="flex justify-between items-center mb-6 border-b pb-4 mt-4">
@@ -14,7 +40,7 @@ export default function EventHeader(props) {
         <Match when={auth.user() && props.role === "creator"}>
           <button
             type="button"
-            onClick={() => HapusEvent(props.event?.id)}
+            onClick={HapusEvent}
             class="px-4 py-2 border border-red-500 text-red-500 font-semibold rounded hover:bg-red-50 transition-colors"
           >
             Delete Event
