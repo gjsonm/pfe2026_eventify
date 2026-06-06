@@ -54,7 +54,7 @@ const Dashboard = () => {
 
       <div>
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start mx-auto">
-          <For each={filteredEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Saat ini belum ada event yang tersedia</p>}>
+          <For each={filteredEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">Currently no events available</p>}>
             {(event) => (
               <Card
                 nama={event.name}
