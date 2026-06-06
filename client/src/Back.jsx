@@ -1,10 +1,15 @@
-// (Komponen routing bawaan library, pindah halaman tanpa reload)
-import { A } from "@solidjs/router";
+import { useNavigate } from "@solidjs/router";
 
 export default function BackButton() {
+  const navigate = useNavigate();
+
   return (
-    <A href="/myevent" class="inline-block px-4 py-2 border border-black-300 text-black-700 font-semibold rounded hover:border-indigo-500 hover:text-indigo-500 transition-colors">
-      {"< "}Back to Event
-    </A>
+    <button
+      type="button"
+      onClick={() => navigate(-1)}
+      class="inline-block px-4 py-2 border border-black-300 text-black-700 font-semibold rounded hover:border-indigo-500 hover:text-indigo-500 transition-colors"
+    >
+      {"< "}Back
+    </button>
   );
 }

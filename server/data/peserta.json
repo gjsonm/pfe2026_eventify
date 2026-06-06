@@ -1,25 +1,5 @@
 [
     {
-        "id": 1,
-        "participant_id": 1,
-        "event_id": 2
-    },
-    {
-        "id": 2,
-        "participant_id": 1,
-        "event_id": 3
-    },
-    {
-        "id": 3,
-        "participant_id": 1,
-        "event_id": 4
-    },
-    {
-        "id": 4,
-        "participant_id": 1,
-        "event_id": 5
-    },
-    {
         "id": 5,
         "participant_id": 2,
         "event_id": 1
