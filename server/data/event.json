@@ -55,168 +55,68 @@
         "location": "Paskal 23",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event6.jpg",
         "description": "ini untuk deskripsi dari event ini",
         "creator": 5
     },
     {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
+        "id": 7,
+        "name": "Mabar Mobile Legend",
+        "location": "Universitas Katolik Parahyangan",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event7.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
+        "creator": 1
     },
     {
-        "id": 6,
-        "name": "Nobar Spongebob",
+        "id": 8,
+        "name": "Nobar Youtube",
         "location": "Paskal 23",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
-        "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
-    },
-    {
-        "id": 6,
-        "name": "Nobar Spongebob",
-        "location": "Paskal 23",
-        "date": "1 Juni 2026",
-        "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event8.png",
         "description": "ini untuk deskripsi dari event ini",
         "creator": 2
     },
     {
-        "id": 6,
-        "name": "Nobar Spongebob",
+        "id": 9,
+        "name": "Nobar Patrick",
         "location": "Paskal 23",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event9.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 2
+        "creator": 3
     },
     {
-        "id": 6,
-        "name": "Nobar Spongebob",
+        "id": 10,
+        "name": "Nobar Badminton",
         "location": "Paskal 23",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event10.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 2
+        "creator": 4
     },
     {
-        "id": 6,
-        "name": "Nobar Spongebob",
+        "id": 11,
+        "name": "Nobar Avenger",
         "location": "Paskal 23",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event11.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 2
+        "creator": 5
     },
     {
-        "id": 6,
-        "name": "Nobar Spongebob",
+        "id": 12,
+        "name": "Nobar Conan",
         "location": "Paskal 23",
         "date": "1 Juni 2026",
         "time": "18:00",
-        "image": "BB.jpg",
+        "image": "event12.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 2
+        "creator": 5
     }
 ]

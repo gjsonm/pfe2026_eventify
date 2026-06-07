@@ -3,12 +3,12 @@ import Pagination from "./Pagination";
 import { useEventContext } from "./context/EventContext"
 import { createSignal } from "solid-js";
 
-export default function EventDetailSection({ event }) {
+export default function EventDetailSection(props) {
     const { peserta, pengguna } = useEventContext();
     const participantList = () => {
-        if (!event) return [];
+        if (!props.event) return [];
         return peserta
-            .filter(p => p.event_id === event.id)
+            .filter(p => p.event_id === props.event.id)
             .map(p => {
                 const user = pengguna.find(u => u.id === p.participant_id);
                 return user ? user.name : "Unknown User";
@@ -29,14 +29,14 @@ export default function EventDetailSection({ event }) {
                 <div class="lokasi">
                     <h3 class="font-bold text-black text-lg mb-2">Location</h3>
                     <div class="border border-black rounded px-3 py-2 flex items-center gap-2">
-                        <p class="text-black m-0">{event?.location}</p>
+                        <p class="text-black m-0">{props.event?.location}</p>
                     </div>
                 </div>
 
                 <div class="deskripsiAcara flex-grow">
                     <h3 class="font-bold text-black text-lg mb-2">Event Description</h3>
                     <div class="border border-black rounded p-3 h-64 overflow-y-auto">
-                        <p class="text-black m-0">{event?.description}</p>
+                        <p class="text-black m-0">{props.event?.description}</p>
                     </div>
                 </div>
             </div>
@@ -46,14 +46,14 @@ export default function EventDetailSection({ event }) {
                     <div class="tanggal">
                         <h3 class="font-bold text-black text-lg mb-2">Date</h3>
                         <div class="border border-black rounded px-3 py-2 flex items-center gap-2">
-                            <p class="text-black m-0">{event?.date}</p>
+                            <p class="text-black m-0">{props.event?.date}</p>
                         </div>
                     </div>
 
                     <div class="waktu">
                         <h3 class="font-bold text-black text-lg mb-2">Time</h3>
                         <div class="border border-black rounded px-3 py-2 flex items-center gap-2">
-                            <p class="text-black m-0">{event?.time}</p>
+                            <p class="text-black m-0">{props.event?.time}</p>
                         </div>
                     </div>
                 </div>
