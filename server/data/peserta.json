@@ -15,11 +15,6 @@
         "event_id": 4
     },
     {
-        "id": 8,
-        "participant_id": 2,
-        "event_id": 5
-    },
-    {
         "id": 9,
         "participant_id": 3,
         "event_id": 1
