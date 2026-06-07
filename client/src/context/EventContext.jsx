@@ -8,7 +8,7 @@ export function EventProvider(props) {
     const [peserta, setPeserta] = createStore([]);
     const [pengguna, setPengguna] = createStore([]);
 
-    onMount(async () => {
+    const fetchEvents = async () => {
         try {
             const res = await fetch("http://localhost:3001/api/events");
             const data = await res.json();
@@ -19,13 +19,18 @@ export function EventProvider(props) {
         } catch (error) {
             console.error("Ada error saat ngambil data event:", error);
         }
+    };
+
+    onMount(() => {
+        fetchEvents();
     });
 
     return (
         <EventContext.Provider value={{
             events, setEvents,
             peserta, setPeserta,
-            pengguna, setPengguna
+            pengguna, setPengguna,
+            fetchEvents
         }}>
             {props.children}
         </EventContext.Provider>
