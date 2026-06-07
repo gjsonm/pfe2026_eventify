@@ -2,10 +2,10 @@ import { A } from "@solidjs/router";
 import { For } from "solid-js";
 
 export default function Pagination(props) {
-    
+
     const pageNumbers = () => {
         const pages = [];
-        for(let i = 1; i <= props.total(); i++){
+        for (let i = 1; i <= props.total(); i++) {
             pages.push(i);
         }
         return pages;
@@ -14,7 +14,7 @@ export default function Pagination(props) {
     return (
         <div className="pagination">
             <div class="mt-6 flex items-center justify-end gap-2">
-                <button 
+                <button
                     onClick={() => props.onPageChange(props.current() - 1)}
                     disabled={props.current() === 1}
                     class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed"
@@ -33,7 +33,7 @@ export default function Pagination(props) {
                     )}
                 </For>
 
-                <button 
+                <button
                     onClick={() => props.onPageChange(props.current() + 1)}
                     disabled={props.current() === props.total() || props.total() === 0}
                     class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed"

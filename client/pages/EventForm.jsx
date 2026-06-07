@@ -1,15 +1,45 @@
 import { createSignal, Match, Switch } from "solid-js";
 import { A, useNavigate } from "@solidjs/router";
 import { useAuthContext } from "../src/context/AuthContext";
-
+import { useEventContext } from "../src/context/EventContext";
 const EventForm = () => {
     const auth = useAuthContext();
     const navigate = useNavigate();
-
-    const handleSubmit = (e) => {
+    const { setEvents } = useEventContext();
+    const handleSubmit = async (e) => {
         if (e) e.preventDefault();
-        alert(`Event Successfully Created!`);
-        navigate("/");
+
+        const formdata = new FormData();
+        formdata.append("name", eventName());
+        formdata.append("date", eventDate());
+        formdata.append("time", eventTime());
+        formdata.append("location", eventLocation());
+        formdata.append("description", eventDesc());
+        formdata.append("creator", auth.user().id);
+        if (!eventImage()) {
+            alert("Gambar event wajib diunggah!");
+            return;
+        }
+
+        formdata.append("image", eventImage());
+
+        try {
+            const response = await fetch('http://localhost:3001/api/create-event', {
+                method: 'POST',
+                body: formdata
+            });
+
+            if (response.ok) {
+                alert(`Event Successfully Created!`);
+                const newEvent = await response.json();
+                setEvents(prev => [...prev, newEvent]);
+                navigate("/");
+            } else {
+                alert("Gagal membuat event.");
+            }
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const [eventName, setEventName] = createSignal("")
@@ -17,6 +47,7 @@ const EventForm = () => {
     const [eventTime, setEventTime] = createSignal("")
     const [eventLocation, setEventLocation] = createSignal("")
     const [eventDesc, setEventDesc] = createSignal("")
+    const [eventImage, setEventImage] = createSignal("")
 
     return (
         <Switch fallback={navigate("/login")}>
@@ -35,8 +66,33 @@ const EventForm = () => {
 
                     <form onSubmit={handleSubmit} class="w-full max-w-2xl flex flex-col gap-6">
                         {/* Bagian tambah gambar */}
-                        <div class="border-2 border-gray-400 rounded-md p-12 flex flex-col items-center justify-center bg-gray-50 cursor-pointer hover:bg-gray-100 transition-colors">
-                            <span class="text-gray-600 font-medium text-lg">+ Add Image</span>
+                        <div class="border border-gray-400 rounded-md p-6 flex flex-col gap-4 bg-white">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-lg font-semibold text-gray-800">Event Image:</label>
+                                <input
+                                    id="file"
+                                    type="file"
+                                    accept=".jpg, .jpeg, .png"
+                                    required
+                                    onChange={(e) => {
+                                        if (e.target.files && e.target.files.length > 0) {
+                                            setEventImage(e.target.files[0]);
+                                            const file = e.target.files[0];
+                                            const reader = new FileReader();
+                                            const alamatPrev = document.getElementById('file-preview')
+                                            reader.onload = (e) => {
+                                                alamatPrev.src = e.target.result;
+                                                alamatPrev.classList.remove('hidden');
+                                            };
+                                            reader.readAsDataURL(file);
+                                        }
+                                    }}
+                                    class="w-full text-gray-700 p-2 border border-gray-300 rounded-md hover:outline-none hover:ring-1 hover:ring-indigo-500"
+                                />
+                                <div class="preview">
+                                    <img id="file-preview" class="preview-img hidden" src="" alt="Preview" />
+                                </div>
+                            </div>
                         </div>
 
                         <div class="border border-gray-400 rounded-md p-6 flex flex-col gap-4 bg-white">
