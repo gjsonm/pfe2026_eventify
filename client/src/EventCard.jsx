@@ -29,7 +29,7 @@ function Card(props) {
     >
       {/* Gambar Event */}
       <img
-        src={`/src/img/${props.gambar}`}
+        src={`http://localhost:3001/img/${props.gambar}`}
         alt="Gambar Event"
         class="
           h-28
