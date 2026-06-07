@@ -1,9 +1,21 @@
 const express = require('express')
+const multer = require('multer');
 const app = express()
 const port = 3001
 const fs = require('fs');
-
+// ref https://expressjs.com/en/starter/static-files/
+app.use('/img', express.static('img'));
 app.use(express.json())
+
+// ref : https://medium.com/@rastogi.programmer/what-is-multer-22ecfd6ecafe
+const storage = multer.diskStorage({
+    destination: './img/',
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + '-' + file.originalname);
+    }
+});
+// Initialize upload middleware
+const upload = multer({ storage: storage });
 
 // ref https://dev.to/reynaldi/how-to-fix-the-no-access-control-allow-origin-header-error-5c1j
 const cors = require('cors');
@@ -80,22 +92,34 @@ app.post('/api/register-event', (req, res) => {
 })
 
 // Bikin event
-app.post('/api/create-event', (req, res) => {
+app.post('/api/create-event', upload.single('image'), (req, res) => {
     const data = fs.readFileSync('./data/event.json', 'utf8')
     const events = JSON.parse(data)
 
     const newEvent = {
-        id: events.length + 1,
+        id: events.length > 0 ? events[events.length - 1].id + 1 : 1,
         name: req.body.name,
         date: req.body.date,
         time: req.body.time,
         location: req.body.location,
         description: req.body.description,
-        image: req.body.image
+        creator: parseInt(req.body.creator),
+        image: req.file ? req.file.filename : ""
     }
     events.push(newEvent)
 
     fs.writeFileSync('./data/event.json', JSON.stringify(events, null, 4))
+
+    const dataPeserta = fs.readFileSync('./data/peserta.json', 'utf8')
+    const pesertas = JSON.parse(dataPeserta)
+    const newPa = {
+        id: pesertas.length > 0 ? pesertas[pesertas.length - 1].id + 1 : 1,
+        participant_id: parseInt(req.body.creator),
+        event_id: newEvent.id
+    }
+    pesertas.push(newPa)
+    fs.writeFileSync('./data/peserta.json', JSON.stringify(pesertas, null, 4))
+
     res.json(newEvent)
 })
 
