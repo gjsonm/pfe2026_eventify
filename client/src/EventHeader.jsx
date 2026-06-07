@@ -10,8 +10,6 @@ export default function EventHeader(props) {
   const { fetchEvents } = useEventContext();
 
   const HapusEvent = async (e) => {
-    console.log("Tombol diklik, mencoba menghapus event:", props.event?.id);
-
     if (!auth.user() || !props.event?.id) return;
     try {
       const response = await fetch("http://localhost:3001/api/cancel-event", {
