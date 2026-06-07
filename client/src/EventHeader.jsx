@@ -1,11 +1,13 @@
 import { Match, Switch } from "solid-js";
 import { useNavigate } from "@solidjs/router";
 import { useAuthContext } from "./context/AuthContext";
+import { useEventContext } from "./context/EventContext";
 import CancelButton from "./CancelButton";
 
 export default function EventHeader(props) {
   const auth = useAuthContext();
   const navigate = useNavigate();
+  const { fetchEvents } = useEventContext();
 
   const HapusEvent = async (e) => {
     console.log("Tombol diklik, mencoba menghapus event:", props.event?.id);
@@ -22,6 +24,7 @@ export default function EventHeader(props) {
       });
 
       if (response.ok) {
+        await fetchEvents();
         alert("Event successfully deleted.");
         navigate(-1);
       } else {
