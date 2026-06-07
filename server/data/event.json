@@ -177,7 +177,7 @@
         "time": "18:00",
         "image": "BB.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
+        "creator": 2
     },
     {
         "id": 6,
@@ -187,7 +187,7 @@
         "time": "18:00",
         "image": "BB.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
+        "creator": 2
     },
     {
         "id": 6,
@@ -197,7 +197,7 @@
         "time": "18:00",
         "image": "BB.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
+        "creator": 2
     },
     {
         "id": 6,
@@ -207,7 +207,7 @@
         "time": "18:00",
         "image": "BB.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
+        "creator": 2
     },
     {
         "id": 6,
@@ -217,6 +217,6 @@
         "time": "18:00",
         "image": "BB.jpg",
         "description": "ini untuk deskripsi dari event ini",
-        "creator": 5
+        "creator": 2
     }
 ]

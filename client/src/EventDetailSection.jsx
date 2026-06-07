@@ -1,6 +1,7 @@
 import Peserta from "./Peserta";
 import Pagination from "./Pagination";
 import { useEventContext } from "./context/EventContext"
+import { createSignal } from "solid-js";
 
 export default function EventDetailSection({ event }) {
     const { peserta, pengguna } = useEventContext();
@@ -14,6 +15,14 @@ export default function EventDetailSection({ event }) {
             });
     };
 
+    const [currentPage, setCurrentPage] = createSignal(1);
+    const pesertaPerPage = 5; 
+    const start = () => (currentPage() - 1) * pesertaPerPage;
+    const paginatedParticipants = () => {
+        return participantList().slice(start(), start() + pesertaPerPage);
+    };
+
+    const totalPages = () => Math.ceil(participantList().length / pesertaPerPage);
     return (
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full mt-6">
             <div class="col-span-1 flex flex-col gap-6">
@@ -50,8 +59,16 @@ export default function EventDetailSection({ event }) {
                 </div>
 
                 <div class="tabel-peserta w-full mt-2">
-                    <Peserta participantList={participantList()} />
-                    <Pagination />
+                    {/* <Peserta participantList={paginatedParticipants()} /> */}
+                    <Peserta 
+                        participantList={paginatedParticipants()} 
+                        start={start()} 
+                    />
+                    <Pagination 
+                        current={currentPage} 
+                        total={totalPages} 
+                        onPageChange={(page) => setCurrentPage(page)} 
+                    />
                 </div>
             </div>
         </div>
