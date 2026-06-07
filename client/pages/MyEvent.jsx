@@ -2,7 +2,7 @@ import { A, useNavigate } from "@solidjs/router";
 import Card from "../src/EventCard.jsx";
 import Pagination from "../src/Pagination.jsx";
 import { useAuthContext } from "../src/context/AuthContext.jsx";
-import { Match, Switch, For } from "solid-js";
+import { Match, Switch, For, createSignal } from "solid-js";
 import { useEventContext } from "../src/context/EventContext.jsx";
 
 const MyEvent = () => {
@@ -36,6 +36,22 @@ const MyEvent = () => {
     return events.filter((event) => idEvents.includes(event.id));
   };
 
+  const itemsPerPage = 4;
+  const [currentCreatedPage, setCurrentCreatedPage] = createSignal(1);
+  const paginasiCreatedEvent = () => {
+    const start = (currentCreatedPage() - 1) * itemsPerPage;
+    return createdEvents().slice(start, start + itemsPerPage);
+  }
+  const totalCreatedPages = () => Math.ceil(createdEvents().length / itemsPerPage);
+
+  const [currentJoinedPage, setCurrentJoinedPage] = createSignal(1);
+  const paginasiJoinedEvent = () => {
+    const start = (currentJoinedPage() - 1) * itemsPerPage;
+    return joinedEvents().slice(start, start + itemsPerPage);
+  }
+  const totalJoinedPages = () => Math.ceil(joinedEvents().length / itemsPerPage);
+
+
   return (
     <Switch fallback={navigate("/login")}>
       <Match when={auth.user()}>
@@ -59,7 +75,7 @@ const MyEvent = () => {
             </div>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-            <For each={createdEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">You haven't created any events yet.</p>}>
+            <For each={paginasiCreatedEvent()} fallback={<p class="col-span-full text-gray-500 italic py-4">You haven't created any events yet.</p>}>
               {(event) => (
                 <Card
                   nama={event.name}
@@ -72,7 +88,11 @@ const MyEvent = () => {
               )}
             </For>
           </div>
-          <Pagination />
+          <Pagination 
+            current={currentCreatedPage} 
+            total={totalCreatedPages} 
+            onPageChange={(page) => setCurrentCreatedPage(page)} 
+          />
 
           {/* garis pembatas */}
           <hr class="border-t-4 border-indigo-600"></hr>
@@ -87,7 +107,7 @@ const MyEvent = () => {
             </header>
           </div>
           <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center content-start">
-            <For each={joinedEvents()} fallback={<p class="col-span-full text-gray-500 italic py-4">You haven't joined any events yet.</p>}>
+            <For each={paginasiJoinedEvent()} fallback={<p class="col-span-full text-gray-500 italic py-4">You haven't joined any events yet.</p>}>
               {(event) => (
                 <Card
                   nama={event.name}
@@ -100,7 +120,11 @@ const MyEvent = () => {
               )}
             </For>
           </div>
-          <Pagination />
+          <Pagination 
+            current={currentJoinedPage} 
+            total={totalJoinedPages} 
+            onPageChange={(page) => setCurrentJoinedPage(page)} 
+          />
         </div>
       </Match>
     </Switch>

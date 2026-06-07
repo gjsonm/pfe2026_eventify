@@ -14,7 +14,8 @@ export default function Peserta(props) {
                     <For each={props.participantList}>
                         {(namaPeserta, index) => (
                             <tr>
-                                <td class="py-2 font-bold text-black text-center">{index() + 1}</td>
+                                {/* <td class="py-2 font-bold text-black text-center">{index() + 1}</td> */}
+                                <td class="py-2 font-bold text-black text-center">{props.start + index() + 1}</td>
                                 <td class="py-2 font-bold text-black text-center">{namaPeserta}</td>
                             </tr>
                         )}
