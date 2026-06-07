@@ -80,23 +80,8 @@
         "event_id": 4
     },
     {
-        "id": 22,
-        "participant_id": 2,
-        "event_id": 1
-    },
-    {
         "id": 18,
-        "participant_id": 2,
-        "event_id": 1
-    },
-    {
-        "id": 18,
-        "participant_id": 2,
-        "event_id": 1
-    },
-    {
-        "id": 18,
-        "participant_id": 2,
-        "event_id": 1
+        "participant_id": 1,
+        "event_id": 2
     }
 ]
