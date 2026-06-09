@@ -1,11 +1,26 @@
 const express = require('express')
+const session = require('express-session');
 const multer = require('multer');
 const app = express()
 const port = 3001
 const fs = require('fs');
+
 // ref https://expressjs.com/en/starter/static-files/
 app.use('/img', express.static('img'));
 app.use(express.json())
+
+// ref https://dev.to/rigalpatel001/how-to-set-up-sessions-and-authentication-in-expressjs-fast-and-easy-gf2
+app.use(
+    session({
+        secret: 'eventifysecretkey',
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60,
+        },
+    })
+);
 
 // ref : https://medium.com/@rastogi.programmer/what-is-multer-22ecfd6ecafe
 const storage = multer.diskStorage({
@@ -22,6 +37,7 @@ const cors = require('cors');
 app.use(
     cors({
         origin: ["http://localhost:3000"],
+        credentials: true,
     })
 );
 
@@ -72,8 +88,37 @@ app.post('/api/login', (req, res) => {
         return res.status(401).json({ message: 'Invalid Email or Password' })
     }
 
-    res.json(user)
+    // ngebikin session
+    req.session.user = {
+        id: user.id,
+        name: user.name,
+        email: user.email
+    };
+
+    res.json({
+        success: true,
+        user: req.session.user,
+    });
 })
+
+// logout pengguna
+app.post('/api/logout', (req, res) => {
+    req.session.destroy(() => {
+        res.clearCookie('connect.sid');
+        return res.json({ success: true });
+    });
+});
+
+// buat cek udh login ato belum, di cek session nya udh kebuat blm di server
+app.get('/api/checksession', (req, res) => {
+    if (req.session.user) {
+        // kalo ada return true, dan data user di session nya (id, nama, email)
+        return res.json({ loggedIn: true, user: req.session.user });
+    } else {
+        // kalo gada return false
+        return res.json({ loggedIn: false });
+    }
+});
 
 // register participant ke event
 app.post('/api/register-event', (req, res) => {

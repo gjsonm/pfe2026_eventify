@@ -17,6 +17,7 @@ export default () => {
     const response = await fetch('http://localhost:3001/api/login', {
       method: "POST",
       mode: "cors",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
@@ -26,17 +27,15 @@ export default () => {
       })
     });
 
-    const user = await response.json();
+    const data = await response.json();
     // kalo berhasil login, masukin ke session storage
     if (!response.ok) {
       alert(user.message)
       return;
     }
-    console.log(user)
-    sessionStorage.setItem("user", JSON.stringify(user));
 
-    // masukkin jg ke context auth, biar bs dipake sama page laen
-    auth.setUser(user);
+    auth.setUser(data.user);
+    console.log(data)
 
     // redirect ke dashboard (ref https://docs.solidjs.com/solid-router/reference/primitives/use-navigate)
     navigate("/");
