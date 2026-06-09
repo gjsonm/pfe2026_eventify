@@ -1,14 +1,21 @@
-import { A } from "@solidjs/router";
+import { A, useNavigate } from "@solidjs/router";
 import { useAuthContext } from "./context/AuthContext";
 import { Match, Switch } from "solid-js";
 
 export default () => {
-
+  const navigate = useNavigate();
   const auth = useAuthContext();
 
   async function handleLogout() {
-    sessionStorage.removeItem("user")
-    auth.setUser(null);
+    const response = await fetch("http://localhost:3001/api/logout", {
+      method: "POST",
+      credentials: "include",
+    });
+
+    if (response.ok) {
+      auth.setUser(null);
+      navigate("/login");
+    }
   }
 
   return (
