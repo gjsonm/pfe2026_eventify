@@ -40,5 +40,11 @@
         "name": "andru",
         "email": "andru@gmail.com",
         "password": "pass"
+    },
+    {
+        "id": 8,
+        "name": "robin",
+        "email": "a@gmail.com",
+        "password": "12345"
     }
 ]

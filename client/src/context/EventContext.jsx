@@ -30,7 +30,6 @@ export function EventProvider(props) {
             events, setEvents,
             peserta, setPeserta,
             pengguna, setPengguna,
-            fetchEvents
         }}>
             {props.children}
         </EventContext.Provider>

@@ -73,5 +73,25 @@
         "id": 15,
         "participant_id": 2,
         "event_id": 6
+    },
+    {
+        "id": 16,
+        "participant_id": 8,
+        "event_id": 1
+    },
+    {
+        "id": 17,
+        "participant_id": 8,
+        "event_id": 13
+    },
+    {
+        "id": 18,
+        "participant_id": 1,
+        "event_id": 14
+    },
+    {
+        "id": 19,
+        "participant_id": 8,
+        "event_id": 3
     }
 ]

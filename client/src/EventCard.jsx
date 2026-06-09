@@ -114,7 +114,7 @@ function Card(props) {
                   w-full
                   text-center
                   rounded
-                  bg-indigo-600
+                  bg-green-600
                   px-3
                   py-1
                   text-xs
@@ -122,7 +122,7 @@ function Card(props) {
                   md:py-2
                   md:text-sm
                   text-white
-                  hover:bg-indigo-700
+                  hover:bg-green-700
                 "
               href={`/myevent/${props.eventId}`}
             >
@@ -147,6 +147,7 @@ function Card(props) {
                   md:text-sm
                   text-white
                   hover:bg-indigo-700
+                  cursor-pointer
                 "
             />
           </Match>

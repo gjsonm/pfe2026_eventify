@@ -7,7 +7,7 @@ import CancelButton from "./CancelButton";
 export default function EventHeader(props) {
   const auth = useAuthContext();
   const navigate = useNavigate();
-  const { fetchEvents } = useEventContext();
+  const { setEvents, setPeserta } = useEventContext();
 
   const HapusEvent = async (e) => {
     if (!auth.user() || !props.event?.id) return;
@@ -22,7 +22,8 @@ export default function EventHeader(props) {
       });
 
       if (response.ok) {
-        await fetchEvents();
+        setEvents((prev) => prev.filter((e) => e.id !== parseInt(props.event?.id)));
+        setPeserta((prev) => prev.filter((p) => p.event_id !== parseInt(props.event?.id)));
         alert("Event successfully deleted.");
         navigate(-1);
       } else {
@@ -37,7 +38,7 @@ export default function EventHeader(props) {
     <div className="flex justify-between items-center mb-6 border-b pb-4 mt-4">
       <h1 className="font-bold text-black text-3xl">{props.event?.name}</h1>
 
-      <Switch>
+      <Switch fallback={navigate("/")}>
         <Match when={auth.user() && props.role === "creator"}>
           <button
             type="button"

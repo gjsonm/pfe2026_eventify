@@ -16,7 +16,7 @@ export default function Pagination(props) {
                 <button
                     onClick={() => props.onPageChange(props.current() - 1)}
                     disabled={props.current() === 1}
-                    class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                     {"<-"} Prev
                 </button>
@@ -25,7 +25,7 @@ export default function Pagination(props) {
                     {(page) => (
                         <button
                             onClick={() => props.onPageChange(page)}
-                            class={`pagination-btn ${props.current() === page ? 'active' : ''}`}
+                            class={`pagination-btn cursor-pointer ${props.current() === page ? 'active' : ''}`}
                         >
                             {page}
                         </button>
@@ -35,7 +35,7 @@ export default function Pagination(props) {
                 <button
                     onClick={() => props.onPageChange(props.current() + 1)}
                     disabled={props.current() === props.total() || props.total() === 0}
-                    class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed"
+                    class="pagination-btn disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                     Next {"->"}
                 </button>
