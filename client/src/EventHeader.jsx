@@ -38,7 +38,7 @@ export default function EventHeader(props) {
     <div className="flex justify-between items-center mb-6 border-b pb-4 mt-4">
       <h1 className="font-bold text-black text-3xl">{props.event?.name}</h1>
 
-      <Switch fallback={navigate("/")}>
+      <Switch>
         <Match when={auth.user() && props.role === "creator"}>
           <button
             type="button"

@@ -88,10 +88,10 @@ const MyEvent = () => {
               )}
             </For>
           </div>
-          <Pagination 
-            current={currentCreatedPage} 
-            total={totalCreatedPages} 
-            onPageChange={(page) => setCurrentCreatedPage(page)} 
+          <Pagination
+            current={currentCreatedPage}
+            total={totalCreatedPages}
+            onPageChange={(page) => setCurrentCreatedPage(page)}
           />
 
           {/* garis pembatas */}
@@ -120,10 +120,10 @@ const MyEvent = () => {
               )}
             </For>
           </div>
-          <Pagination 
-            current={currentJoinedPage} 
-            total={totalJoinedPages} 
-            onPageChange={(page) => setCurrentJoinedPage(page)} 
+          <Pagination
+            current={currentJoinedPage}
+            total={totalJoinedPages}
+            onPageChange={(page) => setCurrentJoinedPage(page)}
           />
         </div>
       </Match>
