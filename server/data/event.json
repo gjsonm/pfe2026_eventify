@@ -1,0 +1,142 @@
+[
+    {
+        "id": 1,
+        "name": "Nobar Sang Merah Putih",
+        "location": "Universitas Katolik Parahyangan",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event1.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 1
+    },
+    {
+        "id": 2,
+        "name": "Nobar One Piece",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event2.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 2
+    },
+    {
+        "id": 3,
+        "name": "Nobar The Boys",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event3.jpeg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 3
+    },
+    {
+        "id": 4,
+        "name": "Nobar First Romance",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event4.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 4
+    },
+    {
+        "id": 5,
+        "name": "Nobar Project Hail Mary",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event5.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 5
+    },
+    {
+        "id": 6,
+        "name": "Nobar Spongebob",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event6.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 5
+    },
+    {
+        "id": 7,
+        "name": "Mabar Mobile Legend",
+        "location": "Universitas Katolik Parahyangan",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event7.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 1
+    },
+    {
+        "id": 8,
+        "name": "Nobar Youtube",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event8.png",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 2
+    },
+    {
+        "id": 9,
+        "name": "Nobar Patrick",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event9.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 3
+    },
+    {
+        "id": 10,
+        "name": "Nobar Badminton",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event10.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 4
+    },
+    {
+        "id": 11,
+        "name": "Nobar Avenger",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event11.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 5
+    },
+    {
+        "id": 12,
+        "name": "Nobar Conan",
+        "location": "Paskal 23",
+        "date": "1 Juni 2026",
+        "time": "18:00",
+        "image": "event12.jpg",
+        "description": "ini untuk deskripsi dari event ini",
+        "creator": 5
+    },
+    {
+        "id": 13,
+        "name": "Ultah Sponge Bob",
+        "date": "2026-07-01",
+        "time": "20:26",
+        "location": "Bikin Bottom",
+        "description": "Herogasm",
+        "creator": 8,
+        "image": "1780989792348-BB.jpg"
+    },
+    {
+        "id": 14,
+        "name": "a",
+        "date": "2026-06-09",
+        "time": "18:31",
+        "location": "a",
+        "description": "a",
+        "creator": 1,
+        "image": "1780990196583-pengisi.jpg"
+    }
+]

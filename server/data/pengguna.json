@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Kenneth",
+        "email": "kenneth@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 2,
+        "name": "Andrew",
+        "email": "andrew@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 3,
+        "name": "Greg",
+        "email": "greg@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 4,
+        "name": "Felix",
+        "email": "felix@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 5,
+        "name": "Nadira",
+        "email": "nadira@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 6,
+        "name": "maresi",
+        "email": "maresi@gmail.com",
+        "password": "password"
+    },
+    {
+        "id": 7,
+        "name": "andru",
+        "email": "andru@gmail.com",
+        "password": "pass"
+    },
+    {
+        "id": 8,
+        "name": "robin",
+        "email": "a@gmail.com",
+        "password": "12345"
+    }
+]

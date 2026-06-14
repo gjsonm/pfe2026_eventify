@@ -1,0 +1,193 @@
+import { createSignal, Match, Switch } from "solid-js";
+import { A, useNavigate } from "@solidjs/router";
+import { useAuthContext } from "../src/context/AuthContext";
+import { useEventContext } from "../src/context/EventContext";
+const EventForm = () => {
+    const auth = useAuthContext();
+    const navigate = useNavigate();
+    const { setEvents } = useEventContext();
+    const handleSubmit = async (e) => {
+        if (e) e.preventDefault();
+
+        const formdata = new FormData();
+        formdata.append("name", eventName());
+        formdata.append("date", eventDate());
+        formdata.append("time", eventTime());
+        formdata.append("location", eventLocation());
+        formdata.append("description", eventDesc());
+        formdata.append("creator", auth.user().id);
+        if (!eventImage()) {
+            alert("Gambar event wajib diunggah!");
+            return;
+        }
+
+        formdata.append("image", eventImage());
+
+        try {
+            const response = await fetch('http://localhost:3001/api/create-event', {
+                method: 'POST',
+                body: formdata
+            });
+
+            if (response.ok) {
+                alert(`Event Successfully Created!`);
+                const newEvent = await response.json();
+                setEvents(prev => [...prev, newEvent]);
+                navigate("/");
+            } else {
+                alert("Gagal membuat event.");
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const [eventName, setEventName] = createSignal("")
+    const [eventDate, setEventDate] = createSignal("")
+    const [eventTime, setEventTime] = createSignal("")
+    const [eventLocation, setEventLocation] = createSignal("")
+    const [eventDesc, setEventDesc] = createSignal("")
+    const [eventImage, setEventImage] = createSignal("")
+
+    return (
+        <Switch fallback={navigate("/login")}>
+            <Match when={auth.user()}>
+                <div class="min-h-screen bg-white px-4 py-8 flex flex-col items-center font-sans relative">
+                    <div class="w-full flex justify-start mb-1">
+                        <A
+                            href="/"
+                            class="ml-45 border border-gray-400 text-xs px-3 py-1.5 rounded-md transition-colors flex items-center gap-1 hover:bg-indigo-600 hover:text-white"
+                        >
+                            ← Back to Dashboard
+                        </A>
+                    </div>
+
+                    <h1 class="text-2xl font-bold text-center -mt-10 mb-6">Create New Event</h1>
+
+                    <form onSubmit={handleSubmit} class="w-full max-w-2xl flex flex-col gap-6">
+                        {/* Bagian tambah gambar */}
+                        <div class="border border-gray-400 rounded-md p-6 flex flex-col gap-4 bg-white">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-lg font-semibold text-gray-800">Event Image:</label>
+                                <input
+                                    id="file"
+                                    type="file"
+                                    accept=".jpg, .jpeg, .png"
+                                    required
+                                    onChange={(e) => {
+                                        if (e.target.files && e.target.files.length > 0) {
+                                            setEventImage(e.target.files[0]);
+                                            const file = e.target.files[0];
+                                            const reader = new FileReader();
+                                            const alamatPrev = document.getElementById('file-preview')
+                                            reader.onload = (e) => {
+                                                alamatPrev.src = e.target.result;
+                                                alamatPrev.classList.remove('hidden');
+                                            };
+                                            reader.readAsDataURL(file);
+                                        }
+                                    }}
+                                    class="w-full text-gray-700 p-2 border border-gray-300 rounded-md hover:outline-none hover:ring-1 hover:ring-indigo-500"
+                                />
+                                <div class="preview">
+                                    <img id="file-preview" class="preview-img hidden" src="" alt="Preview" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border border-gray-400 rounded-md p-6 flex flex-col gap-4 bg-white">
+                            {/* baris pertama input - Nama Acara */}
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-lg font-semibold text-gray-800">Event Name:</label>
+                                <input
+                                    type="text"
+                                    value={eventName()}
+                                    onInput={(e) => setEventName(e.target.value)}
+                                    required
+                                    class="w-full border border-gray-400 rounded p-2 text-base focus:outline-indigo-500"
+                                />
+                            </div>
+
+                            {/* baris kedua input - Tanggal dan Waktu */}
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-lg font-semibold text-gray-800">Date:</label>
+                                    <input
+                                        type="date"
+                                        value={eventDate()}
+                                        onInput={(e) => setEventDate(e.target.value)}
+                                        required
+                                        class="w-full border border-gray-400 rounded p-2 text-base focus:outline-indigo-500"
+                                    />
+                                </div>
+
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-lg font-semibold text-gray-800">Time:</label>
+                                    <input
+                                        type="time"
+                                        value={eventDate()}
+                                        onInput={(e) => setEventTime(e.target.value)}
+                                        required
+                                        class="w-full border border-gray-400 rounded p-2 text-base focus:outline-indigo-500"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* baris ketiga input - Lokasi */}
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-lg font-semibold text-gray-800">Location:</label>
+                                <div class="relative w-full">
+                                    <input
+                                        type="text"
+                                        value={eventLocation()}
+                                        onInput={(e) => setEventLocation(e.target.value)}
+                                        required
+                                        class="w-full border border-gray-400 rounded p-2 text-base focus:outline-indigo-500"
+                                    />
+
+                                    <img
+                                        src="/src/img/geo-alt.svg"
+                                        alt="location-icon"
+                                        class="absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 pointer-events-none"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* baris keempat input - Deskripsi */}
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-lg font-semibold text-gray-800">Description:</label>
+                                <textarea
+                                    value={eventDesc()}
+                                    onInput={(e) => setEventDesc(e.target.value)}
+                                    required
+                                    class="w-full border border-gray-400 rounded p-2 text-base focus:outline-indigo-500 resize-none"
+                                />
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="flex justify-end gap-4 mt-2 w-full max-w-2xl">
+                        {/* button batal */}
+                        <A
+                            href="/myEvent"
+                            class="w-36 border border-gray-400 rounded-md py-2 flex justify-center items-center text-center cursor-pointer transition-all duration-200 hover:bg-indigo-600 hover:text-white"
+                        >
+                            Cancel
+                        </A>
+
+                        {/* button submit acara yang dibuat */}
+                        <button
+                            type="button"
+                            onClick={handleSubmit}
+                            class="w-36 bg-indigo-600 text-white border border-indigo-600 rounded-md py-2 cursor-pointer transition-all duration-200 hover:bg-indigo-700 shadow-md shadow-indigo-100"
+                        >
+                            Create Event
+                        </button>
+                    </div>
+                </div>
+            </Match>
+        </Switch>
+    );
+};
+
+export default EventForm;
